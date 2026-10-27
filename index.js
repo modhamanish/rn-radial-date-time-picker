@@ -1,2 +1,4 @@
-export * from "./dist/index.js";
-export { default } from "./dist/index.js";
+import RadialDateTimePicker from "./src/index";
+
+export default RadialDateTimePicker;
+export * from "./src/index";

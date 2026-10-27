@@ -47,7 +47,7 @@ bun add @modhamanish/rn-radial-date-time-picker react-native-reanimated
 ```tsx
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { RadialDatePicker } from "@modhamanish/rn-radial-date-time-picker";
+import RadialDateTimePicker from "@modhamanish/rn-radial-date-time-picker";
 
 export default function App() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -61,7 +61,7 @@ export default function App() {
         </Text>
       </Pressable>
 
-      <RadialDatePicker
+      <RadialDateTimePicker
         mode="date"
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 ```tsx
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { RadialTimePicker } from "@modhamanish/rn-radial-date-time-picker";
+import RadialDateTimePicker from "@modhamanish/rn-radial-date-time-picker";
 
 export default function App() {
   const [selectedTime, setSelectedTime] = useState<Date>(new Date());
@@ -105,7 +105,7 @@ export default function App() {
         </Text>
       </Pressable>
 
-      <RadialTimePicker
+      <RadialDateTimePicker
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         value={selectedTime}
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
 
 ## 🛠️ Props Reference
 
-### `RadialDatePickerProps`
+### `RadialDateTimePickerProps`
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |

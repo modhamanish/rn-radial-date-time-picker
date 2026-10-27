@@ -108,7 +108,7 @@ const STEP_AMPM = 40; // 40 deg separation between AM and PM (non-looping)
 const HOURS_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const AMPM_LIST = ["", "AM", "PM", ""];
 
-export interface RadialDatePickerProps {
+export interface RadialDateTimePickerProps {
   /** Picker mode: "date" or "time". Defaults to "date" */
   mode?: RadialPickerMode;
   /** Currently selected Date (defaults to real current date `new Date()`) */
@@ -152,7 +152,7 @@ export interface RadialDatePickerProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export const RadialDatePicker = memo(function RadialDatePicker({
+export const RadialDateTimePicker = memo(function RadialDateTimePicker({
   mode = "date",
   value,
   isOpen = false,
@@ -1525,3 +1525,8 @@ const styles = StyleSheet.create({
     fontWeight: "900",
   },
 });
+
+
+export type RadialDatePickerProps = RadialDateTimePickerProps;
+export const RadialDatePicker = RadialDateTimePicker;
+export default RadialDateTimePicker;

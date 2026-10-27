@@ -1,2 +1,4 @@
-export * from "./dist/index";
-export { default } from "./dist/index";
+import RadialDateTimePicker from "./src/index";
+
+export default RadialDateTimePicker;
+export * from "./src/index";
