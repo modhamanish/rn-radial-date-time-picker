@@ -1,0 +1,54 @@
+{
+  "name": "@modhamanish/rn-radial-date-time-picker",
+  "version": "1.0.0",
+  "description": "A modern, high-performance radial wheel date and time picker component for React Native.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "release": "node release.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/modhamanish/rn-radial-date-time-picker.git"
+  },
+  "keywords": [
+    "react-native",
+    "date-picker",
+    "time-picker",
+    "radial-picker",
+    "radial-date-picker",
+    "radial-time-picker",
+    "wheel-picker",
+    "circular-picker",
+    "date-time-picker",
+    "reanimated",
+    "ios",
+    "android"
+  ],
+  "author": "Modha Manish",
+  "license": "MIT",
+  "files": [
+    "src",
+    "dist",
+    "index.js",
+    "index.d.ts"
+  ],
+  "bugs": {
+    "url": "https://github.com/modhamanish/rn-radial-date-time-picker/issues"
+  },
+  "homepage": "https://github.com/modhamanish/rn-radial-date-time-picker#readme",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-native": ">=0.60.0",
+    "react-native-reanimated": ">=2.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.0",
+    "react": "^19.3.1",
+    "react-native": "^0.88.0",
+    "react-native-reanimated": "^4.7.1",
+    "typescript": "5.8.3"
+  }
+}
