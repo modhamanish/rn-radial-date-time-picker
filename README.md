@@ -106,6 +106,7 @@ export default function App() {
       </Pressable>
 
       <RadialDateTimePicker
+        mode="time"
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         value={selectedTime}
