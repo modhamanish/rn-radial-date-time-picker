@@ -44,6 +44,10 @@ bun add @modhamanish/rn-radial-date-time-picker react-native-reanimated
 
 ### 1. Date Picker Example
 
+<table>
+  <tr>
+    <td width="62%" valign="top">
+
 ```tsx
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
@@ -84,9 +88,22 @@ const styles = StyleSheet.create({
 });
 ```
 
+  </td>
+  <td width="38%" align="center" valign="middle">
+    <img src="./demo/date-demo.gif" width="260" alt="Date Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+    <br />
+    <sub><b>Date Picker Preview</b></sub>
+  </td>
+  </tr>
+</table>
+
 ---
 
 ### 2. Time Picker Example
+
+<table>
+  <tr>
+    <td width="62%" valign="top">
 
 ```tsx
 import React, { useState } from "react";
@@ -127,6 +144,15 @@ const styles = StyleSheet.create({
   buttonText: { color: "#fff", fontWeight: "700", fontSize: 16 },
 });
 ```
+
+  </td>
+  <td width="38%" align="center" valign="middle">
+    <img src="./demo/time-demo.gif" width="260" alt="Time Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+    <br />
+    <sub><b>Time Picker Preview</b></sub>
+  </td>
+  </tr>
+</table>
 
 ---
 

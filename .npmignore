@@ -1,0 +1,14 @@
+# Exclude demos and media from published package to keep install size tiny
+demo/
+assets/
+*.mp4
+*.mov
+*.gif
+
+# Exclude local build & dev artifacts
+node_modules/
+.git/
+.github/
+.npmrc
+.DS_Store
+*.log

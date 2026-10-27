@@ -4,6 +4,10 @@ node_modules/
 # Build outputs
 dist/
 
+# Raw video recordings (GIFs are kept for README display)
+demo/*.mp4
+demo/*.mov
+
 # Logs and system files
 *.log
 .DS_Store
