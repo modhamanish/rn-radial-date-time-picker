@@ -45,38 +45,32 @@ bun add @modhamanish/rn-radial-date-time-picker react-native-reanimated
 ### 1. Date Picker Example
 
 <table>
-  <tr>
-    <td width="68%" valign="top">
-      <div style="max-height: 480px; overflow-y: auto; padding-right: 8px;">
+<tr>
+<td width="65%" valign="top">
 
 ```tsx
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import RadialDateTimePicker from "@modhamanish/rn-radial-date-time-picker";
 
-export default function App() {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+export default function DateExample() {
+  const [date, setDate] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <View style={styles.container}>
       <Pressable onPress={() => setIsOpen(true)} style={styles.button}>
-        <Text style={styles.buttonText}>
-          📅 {selectedDate.toLocaleDateString()}
-        </Text>
+        <Text style={styles.text}>📅 {date.toLocaleDateString()}</Text>
       </Pressable>
 
       <RadialDateTimePicker
         mode="date"
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        value={selectedDate}
+        value={date}
         showWeekday
         backdropColor="#00000040"
-        onConfirm={(date) => {
-          setSelectedDate(date);
-          console.log("Confirmed Date:", date);
-        }}
+        onClose={() => setIsOpen(false)}
+        onConfirm={(newDate) => setDate(newDate)}
       />
     </View>
   );
@@ -85,20 +79,19 @@ export default function App() {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", alignItems: "center" },
   button: { padding: 14, backgroundColor: "#3b82f6", borderRadius: 10 },
-  buttonText: { color: "#fff", fontWeight: "700", fontSize: 16 },
+  text: { color: "#fff", fontWeight: "700" },
 });
 ```
 
-      </div>
-    </td>
-    <td width="32%" align="center" valign="top">
-      <div style="position: sticky; top: 10px;">
-        <img src="./demo/date-demo.gif" width="220" alt="Date Picker Demo" style="border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
-        <br />
-        <sub><b>Date Picker Preview</b></sub>
-      </div>
-    </td>
-  </tr>
+</td>
+<td width="35%" align="center" valign="top">
+
+<img src="./demo/date-demo.gif" width="210" alt="Date Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
+<br />
+<sub><b>Date Picker Preview</b></sub>
+
+</td>
+</tr>
 </table>
 
 ---
@@ -106,38 +99,34 @@ const styles = StyleSheet.create({
 ### 2. Time Picker Example
 
 <table>
-  <tr>
-    <td width="68%" valign="top">
-      <div style="max-height: 480px; overflow-y: auto; padding-right: 8px;">
+<tr>
+<td width="65%" valign="top">
 
 ```tsx
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import RadialDateTimePicker from "@modhamanish/rn-radial-date-time-picker";
 
-export default function App() {
-  const [selectedTime, setSelectedTime] = useState<Date>(new Date());
+export default function TimeExample() {
+  const [time, setTime] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <View style={styles.container}>
       <Pressable onPress={() => setIsOpen(true)} style={styles.button}>
-        <Text style={styles.buttonText}>
-          ⏰ {selectedTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+        <Text style={styles.text}>
+          ⏰ {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
         </Text>
       </Pressable>
 
       <RadialDateTimePicker
         mode="time"
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        value={selectedTime}
+        value={time}
         minuteGap={5} // Steps: 00, 05, 10, 15... 55
         backdropColor="#00000040"
-        onConfirm={(time) => {
-          setSelectedTime(time);
-          console.log("Confirmed Time:", time);
-        }}
+        onClose={() => setIsOpen(false)}
+        onConfirm={(newTime) => setTime(newTime)}
       />
     </View>
   );
@@ -146,20 +135,19 @@ export default function App() {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", alignItems: "center" },
   button: { padding: 14, backgroundColor: "#10b981", borderRadius: 10 },
-  buttonText: { color: "#fff", fontWeight: "700", fontSize: 16 },
+  text: { color: "#fff", fontWeight: "700" },
 });
 ```
 
-      </div>
-    </td>
-    <td width="32%" align="center" valign="top">
-      <div style="position: sticky; top: 10px;">
-        <img src="./demo/time-demo.gif" width="220" alt="Time Picker Demo" style="border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
-        <br />
-        <sub><b>Time Picker Preview</b></sub>
-      </div>
-    </td>
-  </tr>
+</td>
+<td width="35%" align="center" valign="top">
+
+<img src="./demo/time-demo.gif" width="210" alt="Time Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
+<br />
+<sub><b>Time Picker Preview</b></sub>
+
+</td>
+</tr>
 </table>
 
 ---
