@@ -46,7 +46,8 @@ bun add @modhamanish/rn-radial-date-time-picker react-native-reanimated
 
 <table>
   <tr>
-    <td width="62%" valign="top">
+    <td width="68%" valign="top">
+      <div style="max-height: 480px; overflow-y: auto; padding-right: 8px;">
 
 ```tsx
 import React, { useState } from "react";
@@ -88,12 +89,15 @@ const styles = StyleSheet.create({
 });
 ```
 
-  </td>
-  <td width="38%" align="center" valign="middle">
-    <img src="./demo/date-demo.gif" width="260" alt="Date Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
-    <br />
-    <sub><b>Date Picker Preview</b></sub>
-  </td>
+      </div>
+    </td>
+    <td width="32%" align="center" valign="top">
+      <div style="position: sticky; top: 10px;">
+        <img src="./demo/date-demo.gif" width="220" alt="Date Picker Demo" style="border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
+        <br />
+        <sub><b>Date Picker Preview</b></sub>
+      </div>
+    </td>
   </tr>
 </table>
 
@@ -103,7 +107,8 @@ const styles = StyleSheet.create({
 
 <table>
   <tr>
-    <td width="62%" valign="top">
+    <td width="68%" valign="top">
+      <div style="max-height: 480px; overflow-y: auto; padding-right: 8px;">
 
 ```tsx
 import React, { useState } from "react";
@@ -145,12 +150,15 @@ const styles = StyleSheet.create({
 });
 ```
 
-  </td>
-  <td width="38%" align="center" valign="middle">
-    <img src="./demo/time-demo.gif" width="260" alt="Time Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
-    <br />
-    <sub><b>Time Picker Preview</b></sub>
-  </td>
+      </div>
+    </td>
+    <td width="32%" align="center" valign="top">
+      <div style="position: sticky; top: 10px;">
+        <img src="./demo/time-demo.gif" width="220" alt="Time Picker Demo" style="border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
+        <br />
+        <sub><b>Time Picker Preview</b></sub>
+      </div>
+    </td>
   </tr>
 </table>
 
