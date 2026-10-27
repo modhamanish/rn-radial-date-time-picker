@@ -10,7 +10,32 @@ Features a corner-anchored concentric wheel design with smooth spring animations
 
 ---
 
-## 📱 Features
+## 📱 Preview
+
+<p align="center">
+  <table align="center">
+    <tr>
+      <td align="center" width="50%">
+        <b>📅 Date Picker Mode</b>
+        <br /><br />
+        <img src="./demo/date-demo.gif" width="260" alt="Date Picker Demo" style="border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
+        <br /><br />
+        <sub>Continuous Years, Months & Days with Weekday Support</sub>
+      </td>
+      <td align="center" width="50%">
+        <b>⏰ Time Picker Mode</b>
+        <br /><br />
+        <img src="./demo/time-demo.gif" width="260" alt="Time Picker Demo" style="border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
+        <br /><br />
+        <sub>12-Hour Clock, Custom Minute Intervals & Non-looping AM/PM</sub>
+      </td>
+    </tr>
+  </table>
+</p>
+
+---
+
+## 🌟 Features
 
 - 🎡 **Concentric Radial Wheel Layout**: Anchored elegantly to the bottom-right corner.
 - 📅 **Date Picker Mode**: Continuous years, months, and days with dynamic month lengths & leap year support.
@@ -43,10 +68,6 @@ bun add @modhamanish/rn-radial-date-time-picker react-native-reanimated
 ## 🚀 Quick Start
 
 ### 1. Date Picker Example
-
-<table>
-<tr>
-<td width="65%" valign="top">
 
 ```tsx
 import React, { useState } from "react";
@@ -83,24 +104,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-</td>
-<td width="35%" align="center" valign="top">
-
-<img src="./demo/date-demo.gif" width="210" alt="Date Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
-<br />
-<sub><b>Date Picker Preview</b></sub>
-
-</td>
-</tr>
-</table>
-
 ---
 
 ### 2. Time Picker Example
-
-<table>
-<tr>
-<td width="65%" valign="top">
 
 ```tsx
 import React, { useState } from "react";
@@ -138,17 +144,6 @@ const styles = StyleSheet.create({
   text: { color: "#fff", fontWeight: "700" },
 });
 ```
-
-</td>
-<td width="35%" align="center" valign="top">
-
-<img src="./demo/time-demo.gif" width="210" alt="Time Picker Demo" style="border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);" />
-<br />
-<sub><b>Time Picker Preview</b></sub>
-
-</td>
-</tr>
-</table>
 
 ---
 
