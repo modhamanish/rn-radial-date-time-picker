@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { StyleProp, ViewStyle } from "react-native";
+import type { StyleProp, TextStyle, ViewStyle } from "react-native";
 import type { WithSpringConfig } from "react-native-reanimated";
 
 export interface WheelItemObject {
@@ -19,6 +19,8 @@ export interface WheelRingConfig<T extends WheelItem = WheelItem> {
   color?: string;
   textColor?: string;
   fontSize?: number;
+  textStyle?: StyleProp<TextStyle>;
+  subTextStyle?: StyleProp<TextStyle>;
   itemWidth?: number;
   itemHeight?: number;
   formatLabel?: (item: T) => string;
@@ -34,6 +36,27 @@ export interface SelectedWheelItem<T extends WheelItem = WheelItem> {
   ringIndex: number;
   itemIndex: number;
   item: T;
+}
+
+export interface RadialWheelColors {
+  /** Outermost ring color (Days in date mode / Hours in time mode). Default: '#6377fc' */
+  outer?: string;
+  /** Middle ring color (Months in date mode / Minutes in time mode). Default: '#4d64fb' */
+  middle?: string;
+  /** Inner ring color (Years in date mode / AM-PM in time mode). Default: '#3650fb' */
+  inner?: string;
+  /** Center confirm button circle color. Default: '#1d37e1' */
+  center?: string;
+  /** Checkmark icon color. Default: '#ffffff' */
+  checkmark?: string;
+  /** Shorthand for center button (Circle 1) */
+  ring1?: string;
+  /** Shorthand for inner ring (Circle 2) */
+  ring2?: string;
+  /** Shorthand for middle ring (Circle 3) */
+  ring3?: string;
+  /** Shorthand for outer ring (Circle 4) */
+  ring4?: string;
 }
 
 export interface RadialWheelPickerProps {

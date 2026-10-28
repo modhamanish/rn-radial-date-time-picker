@@ -147,6 +147,39 @@ const styles = StyleSheet.create({
 
 ---
 
+---
+
+### 3. Custom Colors & Text Styling Example
+
+```tsx
+<RadialDateTimePicker
+  mode="date"
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  value={selectedDate}
+  onConfirm={(date) => setSelectedDate(date)}
+  // 🎨 Custom Ring Colors
+  ringColors={{
+    outer: "#10b981",    // Emerald green for Days/Hours
+    middle: "#059669",   // Medium green for Months/Minutes
+    inner: "#047857",    // Deep green for Years/AM-PM
+    center: "#065f46",   // Dark green center checkmark circle
+    checkmark: "#ffffff", // Center checkmark color
+  }}
+  // ✍️ Custom Text Styling
+  textStyle={{
+    fontWeight: "800",
+    letterSpacing: -0.5,
+  }}
+  textColor="#ffffff"
+  subTextStyle={{
+    fontWeight: "600",
+    opacity: 0.85,
+  }}
+  backdropColor="#00000050"
+/>
+```
+
 ## 🛠️ Props Reference
 
 ### `RadialDateTimePickerProps`
@@ -164,6 +197,13 @@ const styles = StyleSheet.create({
 | `maxDate` | `Date` | `undefined` | Latest selectable date boundary (applies in date mode). |
 | `showWeekday`| `boolean` | `false` | When true, renders weekday abbreviations (`Mon`, `Tue`) beneath day numbers. |
 | `backdropColor` | `string` | `'transparent'` | Background overlay color of the full-screen modal backdrop. |
+| `ringColors` | `RadialWheelColors \| string[]` | `{ outer: "#6377fc", middle: "#4d64fb", inner: "#3650fb", center: "#1d37e1" }` | Custom background colors for each concentric ring and center button. |
+| `textStyle` | `StyleProp<TextStyle>` | `undefined` | Custom text style applied to all wheel item labels (fontFamily, fontWeight, fontSize). |
+| `textColor` | `string` | `"#ffffff"` | Custom text color for wheel item labels. |
+| `subTextStyle` | `StyleProp<TextStyle>` | `undefined` | Custom style for weekday labels on the days ring. |
+| `ringTextStyles` | `{ outer?, middle?, inner? }` | `undefined` | Specific text style overrides per concentric ring. |
+| `checkmarkStyle` | `StyleProp<TextStyle>` | `undefined` | Custom style for the center checkmark text ("✓"). |
+| `checkmarkColor` | `string` | `"#ffffff"` | Custom color for the center checkmark icon. |
 | `style` | `StyleProp<ViewStyle>` | `undefined` | Optional container view style overrides. |
 
 ---

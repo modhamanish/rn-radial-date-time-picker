@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleProp, StyleSheet, Text, TextStyle, View } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
@@ -20,6 +20,8 @@ export interface CurvedWheelItemProps {
   fontSize: number;
   subFontSize?: number;
   textColor?: string;
+  textStyle?: StyleProp<TextStyle>;
+  subTextStyle?: StyleProp<TextStyle>;
   itemWidth: number;
   itemHeight: number;
 }
@@ -37,6 +39,8 @@ export const CurvedWheelItem = memo(function CurvedWheelItem({
   fontSize,
   subFontSize,
   textColor = "#ffffff",
+  textStyle,
+  subTextStyle,
   itemWidth,
   itemHeight,
 }: CurvedWheelItemProps) {
@@ -63,7 +67,11 @@ export const CurvedWheelItem = memo(function CurvedWheelItem({
   );
 
   const calculatedSubFontSize = subFontSize ?? Math.max(9, Math.round(fontSize * 0.55));
-  const effectiveTextColor = disabled ? "rgba(255, 255, 255, 0.35)" : textColor;
+  const flattenedTextStyle = StyleSheet.flatten(textStyle);
+  const resolvedTextColor = flattenedTextStyle?.color
+    ? (flattenedTextStyle.color as string)
+    : textColor;
+  const effectiveTextColor = disabled ? "rgba(255, 255, 255, 0.35)" : resolvedTextColor;
 
   const animatedStyle = useAnimatedStyle(() => {
     let diff = (baseAngle + rotation.value - selectionAngle) % 360;
@@ -131,14 +139,23 @@ export const CurvedWheelItem = memo(function CurvedWheelItem({
       {subText ? (
         <Animated.View style={[styles.contentWrapper, animatedStyle]}>
           {/* First line: Day number */}
-          <Text style={[styles.itemText, { fontSize, color: effectiveTextColor }]}>
+          <Text
+            style={[
+              styles.itemText,
+              { fontSize },
+              textStyle,
+              { color: effectiveTextColor },
+            ]}
+          >
             {text}
           </Text>
           {/* Second line: Weekday name (smaller font) */}
           <Text
             style={[
               styles.subText,
-              { fontSize: calculatedSubFontSize, color: effectiveTextColor },
+              { fontSize: calculatedSubFontSize },
+              subTextStyle,
+              { color: effectiveTextColor },
             ]}
           >
             {subText}
@@ -146,7 +163,13 @@ export const CurvedWheelItem = memo(function CurvedWheelItem({
         </Animated.View>
       ) : (
         <Animated.Text
-          style={[styles.itemText, { fontSize, color: effectiveTextColor }, animatedStyle]}
+          style={[
+            styles.itemText,
+            { fontSize },
+            textStyle,
+            { color: effectiveTextColor },
+            animatedStyle,
+          ]}
         >
           {text}
         </Animated.Text>

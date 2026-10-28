@@ -19,6 +19,7 @@ export { RadialWheelPicker } from "./RadialWheelPicker";
 export { CurvedWheelItem, type CurvedWheelItemProps } from "./CurvedWheelItem";
 export type {
   CornerPosition,
+  RadialWheelColors,
   RadialWheelPickerProps,
   RadialWheelPickerRef,
   SelectedWheelItem,

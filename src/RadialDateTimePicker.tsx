@@ -15,8 +15,10 @@ import {
   StyleSheet,
   Text,
   View,
+  TextStyle,
   ViewStyle,
 } from "react-native";
+import type { RadialWheelColors } from "./types";
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -148,6 +150,56 @@ export interface RadialDateTimePickerProps {
    * @default "transparent"
    */
   backdropColor?: string;
+  /**
+   * Custom colors for the radial wheel concentric rings and center button.
+   * Can be an object `{ outer, middle, inner, center, checkmark }`
+   * or an array of 4 color strings `[center, inner, middle, outer]`.
+   *
+   * Defaults:
+   * - outer (Days / Hours): "#6377fc"
+   * - middle (Months / Minutes): "#4d64fb"
+   * - inner (Years / AM-PM): "#3650fb"
+   * - center: "#1d37e1"
+   * - checkmark: "#ffffff"
+   */
+  ringColors?: RadialWheelColors | string[];
+
+  /**
+   * Custom text style applied to all wheel item labels (e.g. fontFamily, fontWeight, fontSize).
+   */
+  textStyle?: StyleProp<TextStyle>;
+
+  /**
+   * Custom text color for wheel item labels.
+   * @default "#ffffff"
+   */
+  textColor?: string;
+
+  /**
+   * Custom style for secondary subtext (e.g. weekday name "Tue" on Day ring).
+   */
+  subTextStyle?: StyleProp<TextStyle>;
+
+  /**
+   * Specific text styles per ring.
+   */
+  ringTextStyles?: {
+    outer?: StyleProp<TextStyle>;
+    middle?: StyleProp<TextStyle>;
+    inner?: StyleProp<TextStyle>;
+  };
+
+  /**
+   * Custom style for the center checkmark text ("✓").
+   */
+  checkmarkStyle?: StyleProp<TextStyle>;
+
+  /**
+   * Custom color for the center checkmark icon.
+   * @default "#ffffff"
+   */
+  checkmarkColor?: string;
+
   /** Optional container style */
   style?: StyleProp<ViewStyle>;
 }
@@ -164,9 +216,16 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
   showWeekday = false,
   minuteGap,
   minuteInterval,
+  ringColors,
+  textStyle,
+  textColor,
+  subTextStyle,
+  ringTextStyles,
+  checkmarkStyle,
+  checkmarkColor,
   backdropColor = "transparent",
   style,
-}: RadialDatePickerProps) {
+}: RadialDateTimePickerProps) {
   // Initial date on mount, clamped to min/max
   const initialDate = useMemo(() => {
     const raw = value ?? new Date();
@@ -1275,6 +1334,53 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
     opacity: opacity1.value,
   }));
 
+  // Resolve ring colors with complete fallback to defaults
+  const resolvedRingColors = useMemo(() => {
+    const DEFAULT_COLORS = {
+      outer: "#6377fc",
+      middle: "#4d64fb",
+      inner: "#3650fb",
+      center: "#1d37e1",
+      checkmark: "#ffffff",
+    };
+
+    if (!ringColors) return DEFAULT_COLORS;
+
+    if (Array.isArray(ringColors)) {
+      if (ringColors.length >= 4) {
+        return {
+          center: ringColors[0] || DEFAULT_COLORS.center,
+          inner: ringColors[1] || DEFAULT_COLORS.inner,
+          middle: ringColors[2] || DEFAULT_COLORS.middle,
+          outer: ringColors[3] || DEFAULT_COLORS.outer,
+          checkmark: DEFAULT_COLORS.checkmark,
+        };
+      }
+      if (ringColors.length === 3) {
+        return {
+          center: DEFAULT_COLORS.center,
+          inner: ringColors[0] || DEFAULT_COLORS.inner,
+          middle: ringColors[1] || DEFAULT_COLORS.middle,
+          outer: ringColors[2] || DEFAULT_COLORS.outer,
+          checkmark: DEFAULT_COLORS.checkmark,
+        };
+      }
+    }
+
+    if (typeof ringColors === "object") {
+      const c = ringColors as RadialWheelColors;
+      return {
+        outer: c.outer ?? c.ring4 ?? DEFAULT_COLORS.outer,
+        middle: c.middle ?? c.ring3 ?? DEFAULT_COLORS.middle,
+        inner: c.inner ?? c.ring2 ?? DEFAULT_COLORS.inner,
+        center: c.center ?? c.ring1 ?? DEFAULT_COLORS.center,
+        checkmark: c.checkmark ?? DEFAULT_COLORS.checkmark,
+      };
+    }
+
+    return DEFAULT_COLORS;
+  }, [ringColors]);
+
   // Base circular styles
   const circle4BaseStyle = useMemo(
     () => [
@@ -1282,13 +1388,13 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
       {
         height: R4 * 2,
         width: R4 * 2,
-        backgroundColor: "#6377fc",
+        backgroundColor: resolvedRingColors.outer,
         borderRadius: R4,
         bottom: -R4,
         right: -R4,
       },
     ],
-    []
+    [resolvedRingColors.outer]
   );
 
   const circle3BaseStyle = useMemo(
@@ -1297,13 +1403,13 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
       {
         height: R3 * 2,
         width: R3 * 2,
-        backgroundColor: "#4d64fb",
+        backgroundColor: resolvedRingColors.middle,
         borderRadius: R3,
         bottom: -R3,
         right: -R3,
       },
     ],
-    []
+    [resolvedRingColors.middle]
   );
 
   const circle2BaseStyle = useMemo(
@@ -1312,13 +1418,13 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
       {
         height: R2 * 2,
         width: R2 * 2,
-        backgroundColor: "#3650fb",
+        backgroundColor: resolvedRingColors.inner,
         borderRadius: R2,
         bottom: -R2,
         right: -R2,
       },
     ],
-    []
+    [resolvedRingColors.inner]
   );
 
   const circle1BaseStyle = useMemo(
@@ -1327,13 +1433,13 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
       {
         height: R1 * 2,
         width: R1 * 2,
-        backgroundColor: "#1d37e1",
+        backgroundColor: resolvedRingColors.center,
         borderRadius: R1,
         bottom: -R1,
         right: -R1,
       },
     ],
-    []
+    [resolvedRingColors.center]
   );
 
   const animatedBackdrop = useAnimatedStyle(() => ({
@@ -1379,6 +1485,8 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
                     fontSize={22}
                     itemWidth={54}
                     itemHeight={38}
+                    textColor={textColor}
+                    textStyle={[textStyle, ringTextStyles?.outer]}
                   />
                 ))
               : RING4_ITEMS.map((item, idx) => (
@@ -1397,6 +1505,9 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
                     subFontSize={showWeekday ? 11 : undefined}
                     itemWidth={62}
                     itemHeight={showWeekday ? 46 : 38}
+                    textColor={textColor}
+                    textStyle={[textStyle, ringTextStyles?.outer]}
+                    subTextStyle={subTextStyle}
                   />
                 ))}
           </Animated.View>
@@ -1417,6 +1528,8 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
                     fontSize={18}
                     itemWidth={54}
                     itemHeight={36}
+                    textColor={textColor}
+                    textStyle={[textStyle, ringTextStyles?.middle]}
                   />
                 ))
               : RING3_ITEMS.map((item) => (
@@ -1433,6 +1546,8 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
                     fontSize={18}
                     itemWidth={64}
                     itemHeight={36}
+                    textColor={textColor}
+                    textStyle={[textStyle, ringTextStyles?.middle]}
                   />
                 ))}
           </Animated.View>
@@ -1456,6 +1571,8 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
                       fontSize={20}
                       itemWidth={48}
                       itemHeight={36}
+                      textColor={textColor}
+                      textStyle={[textStyle, ringTextStyles?.inner]}
                     />
                   );
                 })
@@ -1473,14 +1590,24 @@ export const RadialDateTimePicker = memo(function RadialDateTimePicker({
                     fontSize={16}
                     itemWidth={76}
                     itemHeight={36}
+                    textColor={textColor}
+                    textStyle={[textStyle, ringTextStyles?.inner]}
                   />
                 ))}
           </Animated.View>
 
-          {/* Center Checkmark Circle (Circle 1: #1d37e1) */}
+          {/* Center Checkmark Circle (Circle 1) */}
           <Animated.View style={[circle1BaseStyle, animatedCircle1]} pointerEvents="none">
             <View style={styles.checkmarkWrapper}>
-              <Text style={styles.checkmark}>✓</Text>
+              <Text
+                style={[
+                  styles.checkmark,
+                  { color: checkmarkColor ?? resolvedRingColors.checkmark },
+                  checkmarkStyle,
+                ]}
+              >
+                ✓
+              </Text>
             </View>
           </Animated.View>
         </View>
